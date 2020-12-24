@@ -169,6 +169,7 @@ class CommonController extends BaseController{
 		}
 		//任务类型
 		$taskclasslist = model('TaskClass')->where(array(['state','=',1]))->order('num','ASC')->select()->toArray();
+
 		$TaskClassdata = [];
 		foreach ($taskclasslist as $key => $value) {
 			$TaskClassdata[$key]['group_id']   			= $value['id'];
@@ -313,6 +314,7 @@ class CommonController extends BaseController{
 			$BanksList[$key]['bank'] = $value['bank_name'];
 			$BanksList[$key]['types'] =  $value['pay_type'];
 		}
+
 		$data['info']['BanksList'] = $BanksList;
 
 		/**

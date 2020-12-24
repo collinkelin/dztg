@@ -16,10 +16,44 @@ class UsersModel extends Model{
 		// 新用户信息		
 		$username		= $param['username'];		// 用户名
 		$password		= input('post.password/s');	// 密码
-		$smscode		= input('post.smscode/d');	// 验证码
-		$dest			= (input('post.dest')) ? input('post.dest') : 86;	// 国家区号
+//		$smscode		= input('post.smscode/d');	// 手机验证码
+		$dest			= (input('post.dest')) ? input('post.dest') : 66;	// 国家区号
 		$lang			= (input('post.lang')) ? input('post.lang') : 'id';	// 语言类型
-		
+
+        //用户名验证泰国手机号或谷歌邮箱
+        $is_email = explode('@',$username);
+        //邮箱
+        if(!empty($is_email) && is_array($is_email) && isset($is_email[1])){
+            if($is_email[1] != 'gmail.com'){
+                //return ['code'=>0, 'code_dec'=>'请使用谷歌邮箱!'];
+                $data = ['code' => 0, 'code_dec' => '请使用谷歌邮箱',];
+                if($lang=='cn')	$data['code_dec'] = '请使用谷歌邮箱';
+                elseif($lang=='en') $data['code_dec'] = 'Please use Google Mail';
+                elseif($lang=='id') $data['code_dec']	= 'โปรดใช้ Google Mail';
+                elseif($lang=='th') $data['code_dec']	= 'โปรดใช้ Google Mail';
+                return $data;
+            }
+        }else{//手机
+            if(!is_numeric($username)){
+//                return ['code'=>0, 'code_dec'=>'请输入正确的手机号码!'];
+                $data = ['code' => 0, 'code_dec' => '请输入正确的手机号码',];
+                if($lang=='cn')	$data['code_dec'] = '请输入正确的手机号码';
+                elseif($lang=='en') $data['code_dec'] = 'Please enter the correct phone number';
+                elseif($lang=='id') $data['code_dec']	= 'กรุณากรอกหมายเลขโทรศัพท์ที่ถูกต้อง';
+                elseif($lang=='th') $data['code_dec']	= 'กรุณากรอกหมายเลขโทรศัพท์ที่ถูกต้อง';
+                return $data;
+            }
+            if(mb_strlen($username)!=10){
+//                return ['code'=>0, 'code_dec'=>'不符合手机号码长度!'];
+                $data = ['code' => 0, 'code_dec' => '请输入正确的手机号码',];
+                if($lang=='cn')	$data['code_dec'] = '请输入正确的手机号码';
+                elseif($lang=='en') $data['code_dec'] = 'Please enter the correct phone number';
+                elseif($lang=='id') $data['code_dec']	= 'กรุณากรอกหมายเลขโทรศัพท์ที่ถูกต้อง';
+                elseif($lang=='th') $data['code_dec']	= 'กรุณากรอกหมายเลขโทรศัพท์ที่ถูกต้อง';
+                return $data;
+            }
+        }
+
 // 		if($smscode){
 // 			$cachesmscode	= cache('C_Code_'.$username);		
 // 			if(!$smscode)   return ['code'=>0,'code_dec'=>'请输入验证码'];

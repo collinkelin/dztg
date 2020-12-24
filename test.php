@@ -26,8 +26,9 @@ $params = [
     'body' => 'iphone6s手机配件',
     'notify_url' => 'http://m.vvhgv.com/api/order/callback',
     'return_url' => 'http://m.vvhgv.com/',
-    'sign' => '',
+    'sign' => 'aca37cdb9bf672e2c3f36f2fbfd5bd73',
     'pay_type' => 'kuaijie',
+    'http_referer' => 'm.vvhgv.com',
     'banktype' => '',
 ];
 

@@ -71,9 +71,6 @@ class UserRechargeModel extends Model
 					}elseif($lang=='th'){
 						return ['code' => 0, 'code_dec' => 'มากเกินไปหรือต่ำเกินไป'];
 					}			
-		
-		
-		
 
 		$orderNumber = trading_number();
 		$insertArray = [
