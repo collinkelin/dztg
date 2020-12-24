@@ -263,7 +263,7 @@ class TaskModel extends Model
 
 		$examine_demo		=	(input('post.examine_demo')) ? input('post.examine_demo') : '';	// 审核样例
 
-		if(is_array($examine_demo)){
+		if(is_array($examine_demo) && !empty($examine_demo)){
 			foreach($examine_demo as $key2 => $value2){
 				if(!file_exists('/www/wwwroot/m.vvhgv.com/public'.$value2)){//判断服务器是有该文件
 					if($lang=='cn'){
@@ -288,7 +288,9 @@ class TaskModel extends Model
 				}
 			}
 			$examine_demo		=	json_encode($examine_demo);
-		}
+		}else{
+            return ['code' => 1, 'code_dec' => '没有上传图片/文件'];
+        }
 
 		$task_step		   		=	(input('post.task_step')) ? input('post.task_step') : '';	// 审核样例
 
@@ -557,27 +559,26 @@ class TaskModel extends Model
 			$financial_data_p['types'] 					= 1;	// 用户1，商户2
 
 			model('common/TradeDetails')->tradeDetails($financial_data_p);
-
-			if($lang=='cn'){
-				return ['code' => 1, 'code_dec' => '成功'];
-			}elseif($lang=='en'){
-						return ['code' => 1, 'code_dec' => 'Success'];
-					}elseif($lang=='id'){
-						return ['code' => 1, 'code_dec' => 'sukses'];
-					}elseif($lang=='ft'){
-						return ['code' => 1, 'code_dec' => '成功'];
-					}elseif($lang=='yd'){
-						return ['code' => 1, 'code_dec' => 'सफलता'];
-					}elseif($lang=='vi'){
-						return ['code' => 1, 'code_dec' => 'thành công'];
-					}elseif($lang=='es'){
-						return ['code' => 1, 'code_dec' => 'éxito'];
-					}elseif($lang=='ja'){
-						return ['code' => 1, 'code_dec' => '成功'];
-					}elseif($lang=='th'){
-						return ['code' => 1, 'code_dec' => 'ประสบความสำเร็จ'];
-					}
 		}
+        if($lang=='cn'){
+            return ['code' => 1, 'code_dec' => '成功'];
+        }elseif($lang=='en'){
+            return ['code' => 1, 'code_dec' => 'Success'];
+        }elseif($lang=='id'){
+            return ['code' => 1, 'code_dec' => 'sukses'];
+        }elseif($lang=='ft'){
+            return ['code' => 1, 'code_dec' => '成功'];
+        }elseif($lang=='yd'){
+            return ['code' => 1, 'code_dec' => 'सफलता'];
+        }elseif($lang=='vi'){
+            return ['code' => 1, 'code_dec' => 'thành công'];
+        }elseif($lang=='es'){
+            return ['code' => 1, 'code_dec' => 'éxito'];
+        }elseif($lang=='ja'){
+            return ['code' => 1, 'code_dec' => '成功'];
+        }elseif($lang=='th'){
+            return ['code' => 1, 'code_dec' => 'ประสบความสำเร็จ'];
+        }
 	}
 
 
@@ -1825,7 +1826,12 @@ class TaskModel extends Model
 		);
 
 		$is_up = model('UserTask')->where(array(['ly_user_task.id','=',$order_id],['ly_user_task.uid','=',$uid]))->update($up_trial_data);
-
+        //自动完成任务订单
+        $user_task_id = model('UserTask')->where(array(['ly_user_task.id','=',$order_id],['ly_user_task.uid','=',$uid]))->value('id');
+        $res_audit = model('manage/Task')->AutoAuditUserTask($user_task_id,3);
+        if($res_audit!=1){
+            return ['code' => 0, 'code_dec' => '任务审核完成异常，请联系管理员后台审核'];
+        }
 		if(!$is_up){
 			if($lang=='cn'){
 				return ['code' => 0, 'code_dec' => '失败'];

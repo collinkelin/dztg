@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4fae1c4c-a2a2-42a0-87fc-a7bb1e394392" name="Default Changelist" comment="" />
+    <list default="true" id="4fae1c4c-a2a2-42a0-87fc-a7bb1e394392" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/test.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/controller/CommonController.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/CommonController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/api/model/TaskModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/TaskModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/manage/model/TaskModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/manage/model/TaskModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/manage/view/bet/task_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/manage/view/bet/task_add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/manage/view/bet/task_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/manage/view/bet/task_edit.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -11,7 +20,10 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration">
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/myclabs/php-enum" />
@@ -31,6 +43,7 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1m5bF8HPnkRnL6g17HPjjcGfsIo" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -39,8 +52,19 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../dzyd/dzxts" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="test.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/test.php">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHP Script.test.php" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -50,11 +74,22 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1608786293018</updated>
-      <workItem from="1608786294243" duration="2633000" />
+      <workItem from="1608786294243" duration="14615000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

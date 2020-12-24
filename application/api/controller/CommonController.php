@@ -234,7 +234,8 @@ class CommonController extends BaseController{
 
 
 		$data['info']['setting'] = model('Setting')->field('q_server_name,service_hotline,official_QQ,WeChat_official,Mobile_client,aboutus,company,contact,problem,guides,hezuomeiti,zhifufangshi,record_number,Company_name,Customer_QQ,Accumulated_investment_amount,Conduct_investment_amount,Cumulative_expected_earnings,registered_smart_investors,service_url,seal_img,info_w,min_w,max_w,reg_url,is_sms,ft,cn,en,yny,vi,jp,es,ty,currency,yd')->find();
-         $data['info']['currency']=$data['info']['setting']['currency'];
+        $data['info']['setting']['is_sms'] = 0;
+		$data['info']['currency']=$data['info']['setting']['currency'];
 		//会员等级
 		$UserViplist = model('UserGrade')->where(array('state'=>1))->order('id','ASC')->select()->toArray();
 		$UserViplistdata = [];
@@ -271,13 +272,19 @@ class CommonController extends BaseController{
 		$authenticationdata	=	[];
 		switch($lang){
 			case 'en':
-				$authenticationdata = ['Mobile phone authentication','Wechat authentication','Real name authentication','Identity authentication'];
+				$authenticationdata = ['Real name authentication','Identity authentication'];
 			break;
 			case 'cn':
-				$authenticationdata	=['手机认证','微信认证','实名认证','身份认证'];
+				$authenticationdata	=['实名认证','身份认证'];
+			break;
+			case 'ty':
+				$authenticationdata	=['ตรวจสอบแล้ว','การรับรองความถูกต้อง'];
+            break;
+            case 'th':
+				$authenticationdata	=['ตรวจสอบแล้ว','การรับรองความถูกต้อง'];
 			break;
 			case 'ft':
-				$authenticationdata	=['手機認證','微信認證','實名認證','身份認證'];
+				$authenticationdata	=['實名認證','身份認證'];
 			break;
 			case 'vi':
 				$authenticationdata	=['Xác thực điện thoại','Xác thực chat','Xác thực tên thật','Xác thực danh tính'];

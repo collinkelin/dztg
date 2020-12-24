@@ -49,7 +49,10 @@ class TaskModel extends Model{
         }
 	
 		if (!$res) return '添加失败';
-
+        //自动审核通过，状态改为进行中
+        $order_number = $param['order_number'];
+        $task_id = $this->where('order_number','=',$order_number)->value('id');
+        $this->autoAudit($task_id,3);
 		//添加操作日志
 		model('Actionlog')->actionLog(session('manage_username'),'添加任务：标题为'.$param['title'],1);
 
@@ -159,6 +162,112 @@ class TaskModel extends Model{
 		return 1;
 	}
 
+    public function autoAudit($id,$status){
+        $param = [
+            'id' => $id,
+            'status' => $status
+        ];
+        $updateArray = [];
+
+        if (isset($param['status']) && $param['status']) $updateArray['status']  = $param['status'];
+
+        if (isset($param['remarks']) && $param['remarks']) $updateArray['remarks'] = $param['remarks'];
+
+        $res = $this->where('id', $param['id'])->update($updateArray);
+
+        model('Actionlog')->actionLog(session('manage_username'),'审核任务：'.$param['id'],1);
+
+        if (!$res) return '提交失败';
+
+        if (isset($param['status']) && $param['status']){
+            //审核未通过
+            switch($param['status']){
+                case 5://撤销
+                    $info 		= $this->where(array(['id','=',$param['id']]))->find();
+                    //会员发布的
+                    if($info['uid']){
+                        //任务完成了几次
+                        $count = model('UserTask')->where(array(['task_id','=',$param['id']],['status','=',3]))->count();
+
+                        $r_number = $info['total_number']	-	$count;
+
+                        if($r_number > 0){
+                            $userinfo	= model('Users')->field('ly_users.id,ly_users.username,ly_users.sid,user_total.balance')->join('user_total','ly_users.id=user_total.uid')->where('ly_users.id', $info['uid'])->find();
+                            if($userinfo){
+
+                                $total_price		=	$r_number*$info['reward_price']	+ $r_number*$info['reward_price']*($info['pump']/100);
+
+                                if($total_price>0){
+
+                                    $is_up_to = model('UserTotal')->where('uid', $userinfo['id'])->Inc('balance', $total_price);
+
+                                    if(!$is_up_to){
+                                        $this->where(array(['id','=',$param['id']],['status','=',2]))->update(array('status'=>1));//审核中
+                                        return '提交失败';
+                                    }
+
+                                    // 流水
+                                    $financial_data_p['uid'] 					= $userinfo['id'];
+                                    $financial_data_p['username'] 				= $userinfo['username'];
+                                    $financial_data_p['order_number'] 			= $info['order_number'];
+                                    $financial_data_p['trade_number'] 			= 'L'.trading_number();;
+                                    $financial_data_p['trade_type'] 			= 10;
+                                    $financial_data_p['trade_before_balance']	= $userinfo['balance'];
+                                    $financial_data_p['trade_amount'] 			= $total_price;
+                                    $financial_data_p['account_balance'] 		= $userinfo['balance'] + $total_price;
+                                    $financial_data_p['remarks'] 				= '撤销任务';
+                                    $financial_data_p['types'] 					= 1;	// 用户1，商户2
+                                    model('common/TradeDetails')->tradeDetails($financial_data_p);
+                                }
+                            }
+                        }
+                    }
+
+                    break;
+                case 2:
+                    $info 		= $this->where(array(['id','=',$param['id']],['status','=',2]))->find();
+                    if(!$info){
+                        $this->where(array(['id','=',$param['id']],['status','=',2]))->update(array('status'=>1));//审核中
+                        return '提交失败';
+                    }
+
+                    $userinfo	= model('Users')->field('ly_users.id,ly_users.username,ly_users.sid,user_total.balance')->join('user_total','ly_users.id=user_total.uid')->where('ly_users.id', $info['uid'])->find();
+                    if($userinfo){
+
+                        $total_price		=	$info['total_price']	+	$info['task_pump'];
+
+                        if($total_price>0){
+
+                            $is_up_to = model('UserTotal')->where('uid', $userinfo['id'])->Inc('balance', $total_price);
+
+                            if(!$is_up_to){
+                                $this->where(array(['id','=',$param['id']],['status','=',2]))->update(array('status'=>1));//审核中
+                                return '提交失败';
+                            }
+
+                            // 流水
+                            $financial_data_p['uid'] 					= $userinfo['id'];
+                            $financial_data_p['username'] 				= $userinfo['username'];
+                            $financial_data_p['order_number'] 			= $info['order_number'];
+                            $financial_data_p['trade_number'] 			= 'L'.trading_number();;
+                            $financial_data_p['trade_type'] 			= 10;
+                            $financial_data_p['trade_before_balance']	= $userinfo['balance'];
+                            $financial_data_p['trade_amount'] 			= $total_price;
+                            $financial_data_p['account_balance'] 		= $userinfo['balance'] + $total_price;
+                            $financial_data_p['remarks'] 				= '撤销任务';
+                            $financial_data_p['types'] 					= 1;	// 用户1，商户2
+                            model('common/TradeDetails')->tradeDetails($financial_data_p);
+                        }
+                    }
+
+                    break;
+            }
+        }
+
+
+
+        return 1;
+    }
 	/**
 	 * 审核
 	 * @return [type] [description]
@@ -270,6 +379,172 @@ class TaskModel extends Model{
 
 		return 1;
 	}
+
+	//任务订单自动审核
+    public function AutoAuditUserTask($id,$status){
+
+        /*$param = input('param.');
+        if (!$param) return '提交失败2';*/
+        $param = [
+            'id' => $id,
+            'status' => $status
+        ];
+        /**
+         * 批量审核
+         */
+        if (isset($param['data']) && is_array($param['data'])) return $this->userTaskBatchAudit($param);
+
+        if (!$param || !isset($param['id']) || !$param['id']) return '提交失败2';
+
+        $updateArray = [];
+
+        if (isset($param['status']) && $param['status']) $updateArray['status']  = $param['status'];
+
+        if (isset($param['handle_remarks']) && $param['handle_remarks']) $updateArray['handle_remarks'] = $param['handle_remarks'];//说明
+
+        $nowTime	= time();
+
+        $updateArray['handle_time']		= $nowTime;
+
+        $updateArray['complete_time']	= $nowTime;
+
+        $task_info = model('UserTask')->field('ly_task.order_number,ly_task.reward_price,ly_task.total_number,ly_user_task.status,ly_user_task.uid,ly_user_task.task_id')->join('ly_task','ly_task.id=ly_user_task.task_id')->where('ly_user_task.id',$param['id'])->find();//完成
+
+        if (!$task_info) return '提交失败3';
+
+        $userinfo		= model('Users')->field('ly_users.id,ly_users.vip_level,ly_users.username,ly_users.sid,user_total.balance')->join('user_total','ly_users.id=user_total.uid')->where('ly_users.id', $task_info['uid'])->find();
+
+        if (!$userinfo) return '提交失败3';
+
+        if($param['status']==2){
+            $res = model('UserTask')->where(array(['id','=',$param['id']],['status','=',4]))->update($updateArray);//状态2 审核中的订单才能审核
+        }else{
+            $res = model('UserTask')->where(array(['id','=',$param['id']],['status','=',2]))->update($updateArray);//状态2 审核中的订单才能审核
+        }
+
+        if (!$res) return '提交失败3';
+
+        if (isset($param['status']) && $param['status']){//审核
+
+            $UserDailydata	=	array();
+            switch($updateArray['status']){
+
+                case 3://完成
+
+                    //任务提成
+                    $commission		=	$task_info['reward_price'];//任务单价
+
+                    if($commission > 0){
+
+                        $userinfo		= model('Users')->field('ly_users.id,ly_users.username,ly_users.sid,user_total.balance')->join('user_total','ly_users.id=user_total.uid')->where('ly_users.id', $task_info['uid'])->find();
+
+                        if(!$userinfo){
+                            $up_trial_data_r	=	array(
+                                'status'			=>	2,//审核
+                                'handle_time'		=>	time(),
+                            );
+                            model('UserTask')->where('id', $param['id'])->update(array('status'=>2));//变审核
+                            return '提交失败7';
+                        }
+                        //加余额钱
+                        $is_up_to = model('UserTotal')->where('uid', $userinfo['id'])->setInc('balance', $commission);
+
+                        if(!$is_up_to){
+                            $up_trial_data_r	=	array(
+                                'status'			=>	2,//审核
+                                'handle_time'		=>	time(),
+                            );
+                            model('UserTask')->where('id', $param['id'])->update(array('status'=>2));//变审核
+                            return '提交失败8';
+                        }
+                        //加总金额
+                        model('UserTotal')->where('uid', $userinfo['id'])->setInc('total_balance', $commission);
+                        // 流水
+                        $financial_data_p['uid'] 					= $userinfo['id'];
+                        $financial_data_p['sid'] 					= $userinfo['sid'];
+                        $financial_data_p['username'] 				= $userinfo['username'];
+                        $financial_data_p['order_number'] 			= $task_info['order_number'];
+                        $financial_data_p['trade_number'] 			= 'L'.trading_number();
+                        $financial_data_p['trade_type'] 			= 6;
+                        $financial_data_p['trade_before_balance']	= $userinfo['balance'];
+                        $financial_data_p['trade_amount'] 			= $commission;
+                        $financial_data_p['account_balance'] 		= $userinfo['balance'] + $commission;
+                        $financial_data_p['remarks'] 				= '完成任务';
+                        $financial_data_p['types'] 					= 1;	// 用户1，商户2
+
+                        model('common/TradeDetails')->tradeDetails($financial_data_p);
+
+                        //已经完成的 和 总的任务数 一样 更新任务 完成
+
+                        $y_surplus_number	=	model('UserTask')->where(array(['task_id','=',$task_info['task_id']],['status','=',3]))->count();
+
+                        if($y_surplus_number==$task_info['total_number']){
+                            $arr = array(
+                                'status'			=>4,//完成
+                                'complete_time'		=>	time(),//完成时间
+                            );
+                            $this->where(array(['id','=',$task_info['task_id']],['status','=',3]))->update($arr);
+                        }
+
+                        //上级返点
+                        if($userinfo['sid']){
+                            $rebatearr = array(
+                                'num'			=>	1,
+                                'uid'			=>	$userinfo['id'],
+                                'sid'			=>	$userinfo['sid'],
+                                'order_number'	=>	$task_info['order_number'],
+                                'commission'	=>	$commission,
+                            );
+
+                            $this->setrebate($rebatearr);
+                        }
+                    }
+                    //更新每日完成任务次数
+                    $UserDailydata = array(
+                        'uid'				=>	$userinfo['id'],
+                        'username'			=>	$userinfo['username'],
+                        'field'				=>	'w_t_o_n',//完成
+                        'value' 			=>	1,
+                    );
+
+                    break;
+                case 4://失败
+
+                    //退回任务次数
+                    $this->where('id', $task_info['task_id'])->dec('surplus_number')->inc('receive_number')->update();
+
+                    //更新每日失败任务次数
+                    $UserDailydata = array(
+                        'uid'				=>	$userinfo['id'],
+                        'username'			=>	$userinfo['username'],
+                        'field'				=>	's_t_o_n',//失败
+                        'value' 			=>	1,
+                    );
+                    break;
+                case 5://恶意
+
+                    //退回任务次数
+                    $this->where('id', $task_info['task_id'])->dec('surplus_number')->inc('receive_number')->update();
+                    //更新每日恶意任务次数
+                    $UserDailydata = array(
+                        'uid'				=>	$userinfo['id'],
+                        'username'			=>	$userinfo['username'],
+                        'field'				=>	'e_t_o_n',//恶意
+                        'value' 			=>	1,
+                    );
+                    break;
+            }
+
+            if($UserDailydata){
+                model('UserDaily')->updateReportfield($UserDailydata);
+            }
+        }
+
+        model('Actionlog')->actionLog(session('manage_username'),'审核订单：'.$param['id'],1);
+
+        return 1;
+    }
+
 	/**
 		任务订单审核
 	**/
