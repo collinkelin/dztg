@@ -994,9 +994,10 @@ class UsersModel extends Model{
 		$uid			= $userArr[0];//uid
 		$username     	= $userArr[1];//username
 		$lang			= (input('post.lang')) ? input('post.lang') : 'id';	// 语言类型
-		
-		$userinfo = $this->field('ly_user_total.*,ly_users.*')->join('ly_user_total','ly_users.id=ly_user_total.uid')->where(array('ly_users.id'=>$uid))->findOrEmpty();
-		if (!$userinfo) return ['code'=>0];
+        $userinfo = $this->field('ly_user_total.*,ly_users.*')->join('ly_user_total','ly_users.id=ly_user_total.uid')->where(array('ly_users.id'=>$uid))->findOrEmpty();
+        if (!$userinfo || empty($userinfo['data'])){
+            return ['code'=>0];
+        }
 		//$settingdata                    = model('Setting')->where('id',1)->findOrEmpty();
 		$data['code']                   = 1;
 		$data['token']                  = $token;

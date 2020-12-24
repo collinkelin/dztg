@@ -2,21 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fae1c4c-a2a2-42a0-87fc-a7bb1e394392" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/test.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/CommonController.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/CommonController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/SmsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/SmsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/UserRechargeModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/UserRechargeModel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/api/model/UsersModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/UsersModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.php" beforeDir="false" afterPath="$PROJECT_DIR$/test.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -52,12 +47,13 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../jufushe/jufushe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dztg\data" />
       <recent name="D:\dztg\public" />
     </key>
   </component>
@@ -83,7 +79,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1608786293018</updated>
-      <workItem from="1608786294243" duration="36678000" />
+      <workItem from="1608786294243" duration="37431000" />
+      <workItem from="1608829755023" duration="27000" />
+      <workItem from="1608835426052" duration="1155000" />
     </task>
     <servers />
   </component>
@@ -100,5 +98,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
