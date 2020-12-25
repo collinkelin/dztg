@@ -268,8 +268,34 @@ class SmsModel extends Model{
 		cache('interval'.$data['mobile'], time());
 
 		$result = $this->singleSend($data);
+		//
 
-		if ($result['result'] === 0) {
+        if($lang=='en'){
+            $data['content'] = 'Your verification code is'.$code.',Effective within 30 minutes. Please ignore this message if you are not operating by yourself.';
+        }elseif($lang=='th' || $lang=='ty'){
+            $data['content'] = 'รหัสยืนยันของคุณคือ'.$code.',มีผลภายใน 30 นาที โปรดเพิกเฉยต่อข้อความนี้หากคุณไม่ได้ดำเนินการด้วยตัวเอง';
+        }
+        $data = array(
+            'apiKey' => '7c09d4d076754f02aa797b79b4261b5c',
+            'mobile' => $data['mobile'],
+            'content' => $data['content'],
+        );
+        $pre_json_str = json_encode( $data);
+        $url = 'http://156.230.4.244:6665/sms/sendByJson';
+        $ch = curl_init($url);
+// Attach encoded JSON string to the POST fields
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $pre_json_str);
+// Set the content type to application/json
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+// Return response instead of outputting
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+// Execute the POST request
+        $result = curl_exec($ch);
+// Close cURL resource
+        curl_close($ch);
+        $result = json_decode($result,true);
+
+		if ($result['code'] === 0) {
 			//生成验证码的缓存
 			cache('C_Code_'.$phone, $code, 1800);
             if($lang=='cn'){

@@ -16,7 +16,7 @@ class UsersModel extends Model{
 		// 新用户信息		
 		$username		= $param['username'];		// 用户名
 		$password		= input('post.password/s');	// 密码
-//		$smscode		= input('post.smscode/d');	// 手机验证码
+		$smscode		= input('post.smscode/d');	// 手机验证码
 		$dest			= (input('post.dest')) ? input('post.dest') : 66;	// 国家区号
 		$lang			= (input('post.lang')) ? input('post.lang') : 'id';	// 语言类型
 
@@ -54,18 +54,18 @@ class UsersModel extends Model{
             }
         }
 
-// 		if($smscode){
-// 			$cachesmscode	= cache('C_Code_'.$username);		
-// 			if(!$smscode)   return ['code'=>0,'code_dec'=>'请输入验证码'];
-// 			if($cachesmscode != $smscode){
-// 				$data['code'] = 0;
-// 				if($lang=='cn')	$data['code_dec'] = '验证码错误';
-// 				else $data['code_dec'] = 'Verification code error!';
-// 				return $data;
-// 			}
-// 			//删除验证码缓存
-// 			cache('C_Code_'.$username, NULL);
-// 		}else{
+ 		if($smscode){
+ 			$cachesmscode	= cache('C_Code_'.$username);
+ 			if(!$smscode)   return ['code'=>0,'code_dec'=>'请输入验证码'];
+ 			if($cachesmscode != $smscode){
+ 				$data['code'] = 0;
+ 				if($lang=='cn')	$data['code_dec'] = '短信验证码错误';
+ 				else $data['code_dec'] = 'Verification code error!';
+ 				return $data;
+ 			}
+ 			//删除验证码缓存
+ 			cache('C_Code_'.$username, NULL);
+ 		}else{
 			
 			$code_rand		= (input('post.code_rand')) ? input('post.code_rand') : '';// 随机码
 			$code			= (input('post.code')) ? input('post.code') : '';// 验证码
@@ -85,7 +85,7 @@ class UsersModel extends Model{
 			}
 			cache('C_Code_'.$code_rand, NULL);
 
-// 		}
+ 		}
 		//密码是否一致
 		$re_password	=	input('post.re_password/s');	// 密码
 		
@@ -995,7 +995,7 @@ class UsersModel extends Model{
 		$username     	= $userArr[1];//username
 		$lang			= (input('post.lang')) ? input('post.lang') : 'id';	// 语言类型
         $userinfo = $this->field('ly_user_total.*,ly_users.*')->join('ly_user_total','ly_users.id=ly_user_total.uid')->where(array('ly_users.id'=>$uid))->findOrEmpty();
-        if (!$userinfo || empty($userinfo['data'])){
+        if (!$userinfo || empty($userinfo)){
             return ['code'=>0];
         }
 		//$settingdata                    = model('Setting')->where('id',1)->findOrEmpty();

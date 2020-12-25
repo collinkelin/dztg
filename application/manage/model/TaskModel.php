@@ -15,6 +15,7 @@ class TaskModel extends Model{
 		$param = input('param.');
 		//数据验证
 		$validate = validate('app\manage\validate\Task');
+
 		if (!$validate->scene('add')->check($param)) return $validate->getError();
 
 

@@ -5,7 +5,7 @@ namespace app\api\controller;
 use think\Cache;
 
 use app\api\controller\BaseController;
-
+use think\facade\Request;
 
 
 class CommonController extends BaseController{
@@ -145,7 +145,8 @@ class CommonController extends BaseController{
 			$username		= $usernameData[$nameKey];
 
 			$data['info']['memberList'][$i]['username']		= '****'.mt_rand(1000,9999);
-			$data['info']['memberList'][$i]['header'] 		= $headerImage;
+//			$data['info']['memberList'][$i]['header'] 		= $headerImage;
+			$data['info']['memberList'][$i]['header'] 		= 'head_'.($i+1).'.png';
 			$data['info']['memberList'][$i]['number'] 		= mt_rand(10,100);
 			$data['info']['memberList'][$i]['profit'] 		= round($data['info']['memberList'][$i]['number'] * 1.8,3);
 
@@ -235,7 +236,7 @@ class CommonController extends BaseController{
 
 
 		$data['info']['setting'] = model('Setting')->field('q_server_name,service_hotline,official_QQ,WeChat_official,Mobile_client,aboutus,company,contact,problem,guides,hezuomeiti,zhifufangshi,record_number,Company_name,Customer_QQ,Accumulated_investment_amount,Conduct_investment_amount,Cumulative_expected_earnings,registered_smart_investors,service_url,seal_img,info_w,min_w,max_w,reg_url,is_sms,ft,cn,en,yny,vi,jp,es,ty,currency,yd')->find();
-        $data['info']['setting']['is_sms'] = 0;
+        $data['info']['setting']['is_sms'] = 1;
 		$data['info']['currency']=$data['info']['setting']['currency'];
 		//会员等级
 		$UserViplist = model('UserGrade')->where(array('state'=>1))->order('id','ASC')->select()->toArray();
