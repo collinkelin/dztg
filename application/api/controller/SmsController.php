@@ -19,56 +19,18 @@ class SmsController extends Controller{
 	public function smsCode(){
 	    $lang		= (input('post.lang')) ? input('post.lang') : 'id';	// 语言类型
 
-	    if($lang=='en'){
-		$data	=	array(
-            array('id'=>'1','name'=>'USA(美国)'),
-            array('id'=>'66','name'=>'THAILAND(泰国)'),
-            array('id'=>'62','name'=>'INDOESIA(印度尼西亚)'),
-            array('id'=>'86','name'=>'CHINA(中国)'),
-            array('id'=>'84','name'=>'VIETNAM(越南)'),
-            array('id'=>'34','name'=>'España(西班牙)'),
-            array('id'=>'81','name'=>'JAPAN(日本)'),
-		);
-		return json($data);
-	    }
-	    if($lang=='yd'){
-		$data	=	array(
-		    array('id'=>'1','name'=>'USA(美国)'),
-			array('id'=>'86','name'=>'CHINA(中国)'),
-			array('id'=>'62','name'=>'INDOESIA(印度尼西亚)'),
-			array('id'=>'84','name'=>'VIETNAM(越南)'),
-			array('id'=>'34','name'=>'España(西班牙)'),
-			array('id'=>'81','name'=>'JAPAN(日本)'),
-			array('id'=>'66','name'=>'THAILAND(泰国)'),
-		);
-		return json($data);
-	    }
-	    if($lang=='ft'){
-		$data	=	array(
-		    array('id'=>'86','name'=>'CHINA(中国)'),
-			array('id'=>'1','name'=>'USA(美国)'),
-			array('id'=>'62','name'=>'INDOESIA(印度尼西亚)'),
-			array('id'=>'84','name'=>'VIETNAM(越南)'),
-			array('id'=>'34','name'=>'España(西班牙)'),
-			array('id'=>'81','name'=>'JAPAN(日本)'),
-			array('id'=>'66','name'=>'THAILAND(泰国)'),
-		);
-		return json($data);
-	    }
-	    if($lang=='cn'){
-		$data	=	array(
-            array('id'=>'86','name'=>'CHINA(中国)'),
-            array('id'=>'66','name'=>'THAILAND(泰国)'),
-            array('id'=>'1','name'=>'USA(美国)'),
-            array('id'=>'62','name'=>'INDOESIA(印度尼西亚)'),
-            array('id'=>'84','name'=>'VIETNAM(越南)'),
-            array('id'=>'34','name'=>'España(西班牙)'),
-            array('id'=>'81','name'=>'JAPAN(日本)'),
-		);
-		return json($data);
-	    }
-	    if($lang=='id'){
-		$data	=	array(
+        $setting = model('Setting')->field('cn,ty,en,es')->where('id','>',0)->find();
+        $data = [
+//            1=>['id'=>'66','name'=>'THAILAND(泰国)'],
+//            2=>['id'=>'1','name'=>'USA(美国)'],
+//            3=>['id'=>'86','name'=>'CHINA(中国)'],
+        ];
+
+        ($setting['ty']==1) &&  array_push($data,['id'=>'66','name'=>'THAILAND(泰国)']);
+        ($setting['en']==1) &&  array_push($data,['id'=>'1','name'=>'USA(美国)']);
+        ($setting['cn']==1) &&  array_push($data,['id'=>'86','name'=>'CHINA(中国)']);
+
+        /*$data	=	array(
             array('id'=>'66','name'=>'THAILAND(泰国)'),
             array('id'=>'1','name'=>'USA(美国)'),
             array('id'=>'62','name'=>'INDOESIA(印度尼西亚)'),
@@ -76,59 +38,8 @@ class SmsController extends Controller{
             array('id'=>'84','name'=>'VIETNAM(越南)'),
             array('id'=>'34','name'=>'España(西班牙)'),
             array('id'=>'81','name'=>'JAPAN(日本)'),
-		);
-		return json($data);
-	    }
-	    if($lang=='vi'){
-		$data	=	array(
-		    array('id'=>'84','name'=>'VIETNAM(越南)'),
-		    array('id'=>'62','name'=>'INDOESIA(印度尼西亚)'),
-		    array('id'=>'86','name'=>'CHINA(中国)'),
-			array('id'=>'1','name'=>'USA(美国)'),
-			array('id'=>'34','name'=>'España(西班牙)'),
-			array('id'=>'81','name'=>'JAPAN(日本)'),
-			array('id'=>'66','name'=>'THAILAND(泰国)'),
-		);
-		return json($data);
-	    }
-	    if($lang=='ja'){
-		$data	=	array(
-		    array('id'=>'81','name'=>'JAPAN(日本)'),
-		    array('id'=>'84','name'=>'VIETNAM(越南)'),
-		    array('id'=>'62','name'=>'INDOESIA(印度尼西亚)'),
-		    array('id'=>'86','name'=>'CHINA(中国)'),
-			array('id'=>'1','name'=>'USA(美国)'),
-			array('id'=>'34','name'=>'España(西班牙)'),
-			array('id'=>'66','name'=>'THAILAND(泰国)'),
-		);
-		return json($data);
-	    }
-	    if($lang=='es'){
-		$data	=	array(
-		    array('id'=>'34','name'=>'España(西班牙)'),
-		    array('id'=>'81','name'=>'JAPAN(日本)'),
-		    array('id'=>'84','name'=>'VIETNAM(越南)'),
-		    array('id'=>'62','name'=>'INDOESIA(印度尼西亚)'),
-		    array('id'=>'86','name'=>'CHINA(中国)'),
-			array('id'=>'1','name'=>'USA(美国)'),
-			array('id'=>'66','name'=>'THAILAND(泰国)'),
-		);
-		return json($data);
-	    }
-	    if($lang=='th'){
-		$data	=	array(
-            array('id'=>'66','name'=>'THAILAND(泰国)'),
-            array('id'=>'1','name'=>'USA(美国)'),
-            array('id'=>'62','name'=>'INDOESIA(印度尼西亚)'),
-            array('id'=>'86','name'=>'CHINA(中国)'),
-            array('id'=>'84','name'=>'VIETNAM(越南)'),
-            array('id'=>'34','name'=>'España(西班牙)'),
-            array('id'=>'81','name'=>'JAPAN(日本)'),
-		);
-		return json($data);
-	    }
-		
-		
+        );*/
+        return json($data);
 	}
 	
     /**

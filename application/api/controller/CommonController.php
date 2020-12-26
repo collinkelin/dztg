@@ -144,11 +144,14 @@ class CommonController extends BaseController{
 			$nameKey		= array_rand($usernameData);
 			$username		= $usernameData[$nameKey];
 
+			$orders = mt_rand(10,100);
+
 			$data['info']['memberList'][$i]['username']		= '****'.mt_rand(1000,9999);
 //			$data['info']['memberList'][$i]['header'] 		= $headerImage;
 			$data['info']['memberList'][$i]['header'] 		= 'head_'.($i+1).'.png';
-			$data['info']['memberList'][$i]['number'] 		= mt_rand(10,100);
-			$data['info']['memberList'][$i]['profit'] 		= round($data['info']['memberList'][$i]['number'] * 1.8,3);
+			$data['info']['memberList'][$i]['number'] 		= $orders;
+//			$data['info']['memberList'][$i]['profit'] 		= round($data['info']['memberList'][$i]['number'] * 1.8,3);
+			$data['info']['memberList'][$i]['profit'] 		= $orders*30;
 
 		}
 		
