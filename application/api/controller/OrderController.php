@@ -22,6 +22,7 @@ class OrderController extends BaseController{
             $callback_order = model('UserRecharge')->where('order_number',$out_order_no)->find()->toArray();
 //            var_dump($callback_order);exit;
             if(!empty($callback_order)){
+                $callback_order['state'] = 1;
                 model('manage/UserRecharge')->rechargeDispose($callback_order);
             }
 //            model('UserWithdrawals')->where('order_number',$out_order_no)->setField('state',1);

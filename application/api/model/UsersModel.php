@@ -43,7 +43,7 @@ class UsersModel extends Model{
                 elseif($lang=='th') $data['code_dec']	= 'กรุณากรอกหมายเลขโทรศัพท์ที่ถูกต้อง';
                 return $data;
             }
-            if(mb_strlen($username)!=10){
+            if(mb_strlen($username)>10){
 //                return ['code'=>0, 'code_dec'=>'不符合手机号码长度!'];
                 $data = ['code' => 0, 'code_dec' => '请输入正确的手机号码',];
                 if($lang=='cn')	$data['code_dec'] = '请输入正确的手机号码';

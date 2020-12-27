@@ -47,8 +47,9 @@ class SmsController extends Controller{
      * @return [type] [description]
     */
     public function sendSMSCode(){
-		$data = model('Sms')->sendSMSCode();
-    	return json($data);
+        return json_encode([]);//todo 接入新通道
+		/*$data = model('Sms')->sendSMSCode();
+    	return json($data);*/
     }
 
 	

@@ -144,7 +144,7 @@ class UserRechargeModel extends Model
                 'subject' => 'recharge',
                 'total_fee' => $param['money'],
                 'body' => 'recharge',
-                'notify_url' => 'http://m.vvhgv.com/api/order/callback',
+                'notify_url' => 'http://m.vvhgv.com/api/Order/callBack',
                 'return_url' => 'http://m.vvhgv.com/xml/index.html#/user/recharge',
             ];
             $prestr = asc_sort($params_pay);

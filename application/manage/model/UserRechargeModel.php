@@ -115,11 +115,7 @@ class UserRechargeModel extends Model{
 		$param['dispose_time'] = time();
 		$res = $this->where(array(['order_number','=',$orderNumber],['state','=',3]))->update($param);
 		if(!$res) return '操作失败1';
-
 		if($param['state'] == 1){
-
-
-
 
 			//获取订单信息
 			$orderInfo = $this->field('uid,money,order_number')->where('order_number',$orderNumber)->find();
@@ -129,6 +125,7 @@ class UserRechargeModel extends Model{
             }
 			//获取用户余额
 			$balance = model('UserTotal')->field('balance')->where('uid',$orderInfo['uid'])->find();
+
 			//更新用户金额信息
 			$res2 = model('UserTotal')->where('uid',$orderInfo['uid'])->inc('total_recharge',$orderInfo['money'])->inc('balance',$orderInfo['money'])->update();
 			if(!$res2) return '操作失败2';
@@ -148,7 +145,11 @@ class UserRechargeModel extends Model{
 		}
 
 		//添加操作日志
-		model('Actionlog')->actionLog(session('manage_username'),'处理订单号为'.$orderNumber.'的充值订单',1);
+        if($accept_params===null){
+            model('Actionlog')->actionLog(session('manage_username'),'处理订单号为'.$orderNumber.'的充值订单',1);
+        }else{
+            model('Actionlog')->actionLog('tudo pay','处理订单号为'.$orderNumber.'的充值订单',1);
+        }
 
 		return 1;
 	}
