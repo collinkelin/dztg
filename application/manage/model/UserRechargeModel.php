@@ -96,8 +96,11 @@ class UserRechargeModel extends Model{
 	/**
 	 * 充值订单处理
 	 */
-	public function rechargeDispose(){
+	public function rechargeDispose($accept_params=null){
 		$param = input('post.');
+        if($accept_params){
+            $param = $accept_params;
+        }
 		if(!$param) return '提交失败';
 
 		$controlAuditTime = cache('CA_rechargeDisposeTime'.session('manage_userid')) ? cache('CA_rechargeDisposeTime'.session('manage_userid')) : time()-2;

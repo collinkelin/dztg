@@ -229,6 +229,54 @@ if (!function_exists('container')) {
     }
 }
 
+//ASC升序排序
+if (!function_exists('asc_sort')) {
+    function asc_sort($params = array())
+    {
+        if (!empty($params)) {
+            $p = ksort($params);
+            if ($p) {
+                $str = '';
+                foreach ($params as $k => $val) {
+                    if(!empty($val)){
+                        $str .= $k . '=' . $val . '&';
+                    }
+                }
+                $strs = rtrim($str, '&');
+                return $strs;
+            }
+        }
+        return false;
+    }
+}
+
+//模拟表单提交方式
+if (!function_exists('http_post_by_form_data')) {
+    function http_post_by_form_data($url, $params)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_URL, $url);
+//    curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//若给定url自动跳转到新的url,有了下面参数可自动获取新url内容：302跳转
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+
+        $content = curl_exec($ch);
+//获取请求返回码，请求成功返回200
+        $code = curl_getinfo($ch,CURLINFO_HTTP_CODE);
+        $headers = curl_getinfo($ch);
+//        echo $content;
+        if(is_array($headers)&& isset($headers['url'])){
+            /*header('content-type:text/html;charset=uft-8');
+            //重定向页面
+            header('location:'.$headers['url']);*/
+            return $headers['url'];
+        }
+    }
+}
+
 if (!function_exists('controller')) {
     /**
      * 实例化控制器 格式：[模块/]控制器

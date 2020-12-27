@@ -1,11 +1,127 @@
 <?php
 namespace app\api\model;
+use think\facade\Env;
 use think\model;
 use app\api\validate\UserTotal as UserTotalValidate;
 
 class UserWithdrawalsModel extends model
 {
 	protected $table = 'ly_user_withdrawals';
+
+    protected function config($data=null)
+    {
+        $pay_config = config('pay.');
+        $this->user_seller  = $pay_config['user_seller'];
+        $this->url   = $pay_config['url'];
+        $this->private_key     = Env::get('app_path').'api/config/private.key';
+        $this->pub_key     = Env::get('app_path').'api/config/public.key';
+        $this->partner = $pay_config['parter'];
+        return $this;
+    }
+    public function daifu($order_data)
+    {
+        $this->url = $this->config()->url;
+        $url = $this->url .'/api/cash';
+        $parameter = array(
+            'parter' => $this->partner,                    //商户PID
+            'user_seller' => $this->user_seller,                //商户号
+            'order_no' => $order_data['order_no'],                   //网站订单号
+            'money' => $order_data['money'],
+            'name' => $order_data['account'],
+            'bank_no' => $order_data['bank'],                    //到账的银行卡号
+            'bank_code' => $order_data['bank_code'],                  //银行编码
+            'sign_type' => 'RSA-S',//$order_data['identity']
+            'api_version' => '1.1',
+        );
+        $parameter['sign'] = $this->sign_cash($parameter);
+        $result = $this->post_cash($url, $parameter); //这里返回的json格式数据
+        return json_decode($result,true);
+    }
+    public function sign_cash($data)
+    {
+        ksort($data);
+        $signStr = "";
+        foreach ($data as $key => $val) {
+            $signStr .= $key . '=' . $val . '&';
+        }
+        $signStr  = rtrim($signStr, '&');
+        $pkeyid = openssl_pkey_get_private($this->config()->private_key);
+
+//        echo $this->config()->private_key;
+        if (empty($pkeyid)) {
+//            echo "private key resource identifier False!";
+            return False;
+        }
+        $verify = openssl_sign($signStr, $signature, $pkeyid, OPENSSL_ALGO_MD5);
+        openssl_free_key($pkeyid);
+        return base64_encode($signature);
+    }
+
+    public function query_draw($order_data)
+    {
+        $parameter = array(
+            'order_no' => $order_data['order_no'],
+            'parter' => $this->config()->partner,                    //商户PID
+            'user_seller' => $this->config()->user_seller,                //商户号
+            'sign_type'   => 'RSA-S',
+            'api_version' => '1.1',
+        );
+        $parameter['sign'] = $this->sign_cash($parameter);
+        $result = $this->post_cash($this->url.'/api/cashQuery', $parameter);
+        if($result){
+            $result = json_decode($result,true);
+        }else{
+            return ['code' => 0];
+        }
+        $signback = $result['sign'];unset($result['sign']);
+        if ($this->verifySign($result, $signback, $this->config()->pub_key)) {
+            if ($result['status'] == '0000') {
+                return ['code' => 1, 'msg' => $result['msg']];
+            } elseif ($result['status'] == '0004'||$result['status'] == '0003') {
+                return ['code' => 2, 'msg' => $result['msg']];
+            }
+            return ['code' => 0, 'msg' => $result['msg']];
+        } else {
+
+            return ['code' => 0];
+        }
+    }
+
+    private function verifySign($data, $sign, $keyValue)
+    {
+        $sign = base64_decode($sign);
+        ksort($data);
+        $signStr = "";
+        foreach ($data as $key => $val) {
+            $signStr .= $key . '=' . $val . '&';
+        }
+        $signStr  = rtrim($signStr, '&');
+
+        $keyValue = openssl_get_publickey($keyValue);
+        if (!$keyValue) {
+            return false;
+        }
+        $flag = openssl_verify($signStr, $sign, $keyValue, OPENSSL_ALGO_MD5);
+        if ($flag) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private function post_cash($url, $data)
+    {
+        //初始化
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        $ret = curl_exec($ch);
+        header("Content-type: text/html; charset=utf-8");
+        curl_close($ch);
+        return $ret;
+    }
 
 	/**
 	 * [draw 提现接口]
@@ -370,7 +486,7 @@ class UserWithdrawalsModel extends model
 		$where[] = ['uid' , '=' , $uid];
 
 		$num = $this->where($where)->count();		
-		if($num > 9){
+		if($num > 99){
 			if($lang=='cn'){
 				return ['code' => 0, 'code_dec' => '超过当日最大体现次数'];
 			}elseif($lang=='en'){
@@ -484,7 +600,20 @@ class UserWithdrawalsModel extends model
 		$financial_data['remarks']				=	'平台取款';
 		$financial_data['vip_level']			=	model('Users')->where('id',$uid)->value('vip_level');
 		$financial_data['isdaily']				=	2;
-		$insert = model('TradeDetails')->tradeDetails($financial_data);	
+		$insert = model('TradeDetails')->tradeDetails($financial_data);
+		//调用第三方
+        $order_data = [
+            'order_no'  => $financial_data['order_number'],
+            'money'     => $financial_data['trade_amount'],
+            'account'      => $user_bank['name'],//户名,
+            'bank'     => $user_bank['card_no'],//到账的银行卡号
+            'bank_code'     => $user_bank['name'],//银行编码
+        ];
+        $response = $this->daifu($order_data);
+        if($response['status']!=0){
+            return ['code' => 0, 'code_dec' => $response['msg']];
+        }
+
 		if(!$insert){
 			if($lang=='cn'){
 				return ['code' => 0, 'code_dec' => '业务失败'];

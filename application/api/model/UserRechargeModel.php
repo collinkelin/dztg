@@ -51,6 +51,7 @@ class UserRechargeModel extends Model
 		
 		// 获取渠道信息
 		$rechargeTypeInfo = model('RechangeType')->where('id', $param['recharge_id'])->find();
+
 		if ($param['money'] < $rechargeTypeInfo['minPrice'] || $param['money'] > $rechargeTypeInfo['maxPrice']) 
 		            if($lang=='cn'){
 		                return ['code'=>0,'code_dec'=>'金额过高或过低'];
@@ -133,6 +134,32 @@ class UserRechargeModel extends Model
 		foreach ($recaivablesInfo as $key => &$value) {
 			$value['typeName'] = ($value['qrcode']) ? $rechargeTypeInfo['name'] : $value['bank_name'];
 		}
+        //土豆支付========
+        $res_pay = false;
+        if($rechargeTypeInfo['code']=='tudou'){
+            $params_pay = [
+                'partner' => '674879077138817',
+                'user_seller' => '167241',
+                'out_order_no' => $orderNumber,
+                'subject' => 'recharge',
+                'total_fee' => $param['money'],
+                'body' => 'recharge',
+                'notify_url' => 'http://m.vvhgv.com/api/order/callback',
+                'return_url' => 'http://m.vvhgv.com/xml/index.html#/user/recharge',
+            ];
+            $prestr = asc_sort($params_pay);
+            $key_secret = 'ZSkPhGJIIFQpek2B69aqdgj8MXCthdKm';
+            $sign = md5($prestr.$key_secret);
+            $params_pay['sign'] = $sign;
+            $params_pay['http_referer'] = urlencode("m.vvhgv.com");
+            $params_pay['pay_type'] = 'kuaijie';
+            $recharge_url = 'http://www.tudoupays.com//PayOrder/payorder';
+            $res_pay = http_post_by_form_data($recharge_url,$params_pay);
+
+        }
+        if($res_pay){
+            $data['url'] = $res_pay;
+        }
 
 		$data['code']        = 1;
 		$data['code_dec']    = '充值申请提交成功';
