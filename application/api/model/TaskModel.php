@@ -772,9 +772,13 @@ class TaskModel extends Model
 
 			if($lang=='en'){
 				$data['info'][$key]['vip_dec']			=	$UserGrade['en_name'];
-			}else{
+			}elseif($lang=='th'){
+				$data['info'][$key]['vip_dec']			=	$UserGrade['ty_name'];
+			}elseif($lang=='cn'){
 				$data['info'][$key]['vip_dec']			=	$UserGrade['name'];
-			}
+			}else{
+                $data['info'][$key]['vip_dec']			=	$UserGrade['ty_name'];
+            }
 			$data['info'][$key]['surplus_number']		= 	$value['surplus_number'];
 
 			$data['info'][$key]['group_info']			= 	$TaskClass['group_info'];

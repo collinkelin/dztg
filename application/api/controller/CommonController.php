@@ -239,7 +239,8 @@ class CommonController extends BaseController{
 
 
 		$data['info']['setting'] = model('Setting')->field('q_server_name,service_hotline,official_QQ,WeChat_official,Mobile_client,aboutus,company,contact,problem,guides,hezuomeiti,zhifufangshi,record_number,Company_name,Customer_QQ,Accumulated_investment_amount,Conduct_investment_amount,Cumulative_expected_earnings,registered_smart_investors,service_url,seal_img,info_w,min_w,max_w,reg_url,is_sms,ft,cn,en,yny,vi,jp,es,ty,currency,yd')->find();
-        $data['info']['setting']['is_sms'] = 1;
+//        $data['info']['setting']['is_sms'] = 1;
+        $data['info']['setting']['is_sms'] = 0;
 		$data['info']['currency']=$data['info']['setting']['currency'];
 		//会员等级
 		$UserViplist = model('UserGrade')->where(array('state'=>1))->order('id','ASC')->select()->toArray();

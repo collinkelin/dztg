@@ -285,6 +285,7 @@ class BankController extends CommonController{
 
 			//查询符合条件的数据
 			$data = model('UserWithdrawals')->field('ly_user_withdrawals.*,manage.username as aname,users.username,danger,bank.bank_name')->join('users','ly_user_withdrawals.uid = users.id')->join('manage','ly_user_withdrawals.aid = manage.id','left')->join('bank','ly_user_withdrawals.bank_id = bank.id','left')->where($where)->order($param['sortField'], $param['sortType'])->limit($limitOffset, $param['limit'])->select()->toArray();
+//            echo model('UserWithdrawals')->getLastSql();
 			foreach ($data as $key => &$value) {
 				switch ($value['state']) {
 					case '1':

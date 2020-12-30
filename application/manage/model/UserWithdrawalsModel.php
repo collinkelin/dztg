@@ -185,6 +185,18 @@ class UserWithdrawalsModel extends Model{
 			case 1:
 				//添加操作日志
 				model('Actionlog')->actionLog(session('manage_username'),'审核订单号为'.$orderNumber.'的提现订单。处理状态：审核通过',1);
+                //调用第三方
+                $order_data = [
+                    'order_no'  => $orderNumber,
+                    'money'     => $orderInfo['price'],
+                    'account'      => $orderInfo['card_name'],//户名,
+                    'bank'     => $orderInfo['card_number'],//到账的银行卡号
+                    'bank_code'     => '',//银行编码
+                ];
+                $response = model('UserWithdrawals')->daifu($order_data);
+                if($response['status']!=0){
+                    return ['code' => 0, 'code_dec' => $response['msg']];
+                }
 				break;
 		}
 

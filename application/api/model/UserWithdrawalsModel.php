@@ -601,7 +601,7 @@ class UserWithdrawalsModel extends model
 		$financial_data['vip_level']			=	model('Users')->where('id',$uid)->value('vip_level');
 		$financial_data['isdaily']				=	2;
 		$insert = model('TradeDetails')->tradeDetails($financial_data);
-		//调用第三方
+		/*//调用第三方
         $order_data = [
             'order_no'  => $financial_data['order_number'],
             'money'     => $financial_data['trade_amount'],
@@ -612,7 +612,7 @@ class UserWithdrawalsModel extends model
         $response = $this->daifu($order_data);
         if($response['status']!=0){
             return ['code' => 0, 'code_dec' => $response['msg']];
-        }
+        }*/
 
 		if(!$insert){
 			if($lang=='cn'){

@@ -16,7 +16,8 @@ class UsersModel extends Model{
 		// 新用户信息		
 		$username		= $param['username'];		// 用户名
 		$password		= input('post.password/s');	// 密码
-		$smscode		= input('post.smscode/d');	// 手机验证码
+//		$smscode		= input('post.smscode/d');	// 手机验证码
+		$smscode		= false;	// 手机验证码
 		$dest			= (input('post.dest')) ? input('post.dest') : 66;	// 国家区号
 		$lang			= (input('post.lang')) ? input('post.lang') : 'id';	// 语言类型
 

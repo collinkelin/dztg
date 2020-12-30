@@ -3,6 +3,9 @@ namespace app\common\model;
 
 use think\Model;
 use think\Cache;
+use AlibabaCloud\Client\AlibabaCloud;
+use AlibabaCloud\Client\Exception\ClientException;
+use AlibabaCloud\Client\Exception\ServerException;
 
 class SmsModel extends Model{
 	
@@ -172,7 +175,48 @@ class SmsModel extends Model{
 
 	
 	public function sendSMSCode($phone=''){
-	    
+        /*$accessKeyId = 'LTAI4GH7shb9zZ5kTJaxfACF';
+        $accessSecret = 'HZ7D9wvjhEi9LptEZeDlkGaC9SPzEg'; //注意不要有空格
+        AlibabaCloud::accessKeyClient($accessKeyId, $accessSecret)
+            ->regionId('cn-hangzhou')
+            ->asDefaultClient();
+        $authCodeMT = mt_rand(100000,999999);
+        //TODO 短信模板变量替换JSON串,友情提示:如果JSON中需要带换行符,请参照标准的JSON协议。
+        $jsonTemplateParam = json_encode(['code'=>$authCodeMT]);
+        //TODO 短信模板变量替换JSON串,友情提示:如果JSON中需要带换行符,请参照标准的JSON协议。
+        $result = AlibabaCloud::rpc()
+            ->product('Dysmsapi')
+            ->scheme('https') // https | http
+            ->version('2018-05-01')
+            ->action('SendSms')
+            ->method('POST')
+            ->host('dysmsapi.ap-southeast-1.aliyuncs.com')
+            ->options([
+                'query' => [
+                    'Format' => "JSON",
+                    'Version' => "2018-05-01",
+                    'Timestamp' => '2020-12-28T19:03:00Z',
+                    'SignatureNonce' => microtime().'.',
+                    'SignatureVersion' => '1.0',
+                    'AccessKeyId' => $accessKeyId,
+                    'Action' => 'SendMessageToGlobe',
+                    'Message' => '验证码发送成功!',
+                    'To' => "806572511",
+                    'PhoneNumbers' => "806572511",
+                    'ContentCode' => $authCodeMT,
+                    'TaskId' => (string)time(),
+                ],
+            ])
+            ->request();
+        var_dump($result);exit;
+        try {
+
+        } catch (ClientException $e) {
+            echo $e->getErrorMessage() . PHP_EOL;
+        } catch (ServerException $e) {
+            echo $e->getErrorMessage() . PHP_EOL;
+        }
+        die('sms');*/
 	    $lang		= (input('post.lang')) ? input('post.lang') : 'ft';	// 语言类型
 		
 		$phone = (input('post.phone')) ? input('post.phone') : $phone;// 手机号
@@ -211,7 +255,7 @@ class SmsModel extends Model{
 
 		$sendtime = cache('C_sendtime_'.$ip) ? cache('C_sendtime_'.$ip) : time()-60;
 		if(time()-$sendtime < 60){
-			//return ['code'=>0,'code_dec'=>'发送频繁，稍后再试i'];
+			return ['code'=>0,'code_dec'=>'发送频繁，稍后再试i'];
 		}
 		cache('C_sendtime_'.$ip,time()+60);
 		
@@ -280,20 +324,9 @@ class SmsModel extends Model{
             'mobile' => $data['mobile'],
             'content' => $data['content'],
         );
-        $pre_json_str = json_encode( $data);
-        $url = 'http://156.230.4.244:6665/sms/sendByJson';
-        $ch = curl_init($url);
-// Attach encoded JSON string to the POST fields
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $pre_json_str);
-// Set the content type to application/json
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-// Return response instead of outputting
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-// Execute the POST request
-        $result = curl_exec($ch);
-// Close cURL resource
-        curl_close($ch);
-        $result = json_decode($result,true);
+        //调用短信通道接口
+//        print_r($data);exit;
+
 
 		if ($result['code'] === 0) {
 			//生成验证码的缓存

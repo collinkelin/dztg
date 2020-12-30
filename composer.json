@@ -22,7 +22,8 @@
         "workerman/gatewayclient": "^3.0",
         "endroid/qr-code": "^3.5",
         "khanamiryan/qrcode-detector-decoder": "1.0.2",
-        "dsiddharth2/php-zxing": "1.0.3"
+        "dsiddharth2/php-zxing": "1.0.3",
+        "alibabacloud/client": "^1.5"
     },
     "autoload": {
         "psr-4": {
