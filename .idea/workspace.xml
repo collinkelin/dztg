@@ -2,133 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fae1c4c-a2a2-42a0-87fc-a7bb1e394392" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dztg.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dztg.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/CommonController.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/CommonController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/controller/SmsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/controller/SmsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/TaskModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/TaskModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/UserRechargeModel1.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/UserWithdrawalsModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/UserWithdrawalsModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/api/model/UsersModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/api/model/UsersModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/common/model/SmsModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/common/model/SmsModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/manage/controller/BankController.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/manage/controller/BankController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/manage/model/UserWithdrawalsModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/manage/model/UserWithdrawalsModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.php" beforeDir="false" afterPath="$PROJECT_DIR$/test.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thinkphp/library/think/App.php" beforeDir="false" afterPath="$PROJECT_DIR$/thinkphp/library/think/App.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thinkphp/library/think/Collection.php" beforeDir="false" afterPath="$PROJECT_DIR$/thinkphp/library/think/Collection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thinkphp/library/think/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/thinkphp/library/think/Model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thinkphp/library/think/Validate.php" beforeDir="false" afterPath="$PROJECT_DIR$/thinkphp/library/think/Validate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thinkphp/library/think/cache/driver/Redis.php" beforeDir="false" afterPath="$PROJECT_DIR$/thinkphp/library/think/cache/driver/Redis.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thinkphp/library/think/db/Builder.php" beforeDir="false" afterPath="$PROJECT_DIR$/thinkphp/library/think/db/Builder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thinkphp/library/think/db/Query.php" beforeDir="false" afterPath="$PROJECT_DIR$/thinkphp/library/think/db/Query.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thinkphp/library/think/db/builder/Mysql.php" beforeDir="false" afterPath="$PROJECT_DIR$/thinkphp/library/think/db/builder/Mysql.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thinkphp/library/think/db/connector/Mysql.php" beforeDir="false" afterPath="$PROJECT_DIR$/thinkphp/library/think/db/connector/Mysql.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thinkphp/library/think/model/concern/Conversion.php" beforeDir="false" afterPath="$PROJECT_DIR$/thinkphp/library/think/model/concern/Conversion.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thinkphp/library/think/model/concern/SoftDelete.php" beforeDir="false" afterPath="$PROJECT_DIR$/thinkphp/library/think/model/concern/SoftDelete.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thinkphp/library/think/model/relation/HasManyThrough.php" beforeDir="false" afterPath="$PROJECT_DIR$/thinkphp/library/think/model/relation/HasManyThrough.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thinkphp/library/think/model/relation/HasOne.php" beforeDir="false" afterPath="$PROJECT_DIR$/thinkphp/library/think/model/relation/HasOne.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thinkphp/library/think/model/relation/MorphTo.php" beforeDir="false" afterPath="$PROJECT_DIR$/thinkphp/library/think/model/relation/MorphTo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/bacon/bacon-qr-code/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/bacon/bacon-qr-code/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/bacon/bacon-qr-code/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/bacon/bacon-qr-code/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/bacon/bacon-qr-code/src/Renderer/Image/TransformationMatrix.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/bacon/bacon-qr-code/src/Renderer/Image/TransformationMatrix.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/bacon/bacon-qr-code/src/Renderer/Path/Move.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/bacon/bacon-qr-code/src/Renderer/Path/Move.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/dasprid/enum/.coveralls.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/dasprid/enum/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/dasprid/enum/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/dasprid/enum/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/dasprid/enum/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/dasprid/enum/phpcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/dasprid/enum/src/AbstractEnum.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/dasprid/enum/src/AbstractEnum.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/dasprid/enum/src/NullValue.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/dasprid/enum/src/NullValue.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/dasprid/enum/test/AbstractEnumTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/dasprid/enum/test/AbstractEnumTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/endroid/qr-code/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/endroid/qr-code/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/endroid/qr-code/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/endroid/qr-code/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/phpunit.xml.dist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/src/ErrorCorrectionLevel.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/endroid/qr-code/src/ErrorCorrectionLevel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/src/Exception/InvalidPathException.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/src/Factory/QrCodeFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/endroid/qr-code/src/Factory/QrCodeFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/src/LabelAlignment.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/endroid/qr-code/src/LabelAlignment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/src/QrCode.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/endroid/qr-code/src/QrCode.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/src/QrCodeInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/endroid/qr-code/src/QrCodeInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/src/Response/QrCodeResponse.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/src/Writer/AbstractWriter.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/endroid/qr-code/src/Writer/AbstractWriter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/src/Writer/DebugWriter.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/endroid/qr-code/src/Writer/DebugWriter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/src/Writer/EpsWriter.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/endroid/qr-code/src/Writer/EpsWriter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/src/Writer/PngWriter.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/endroid/qr-code/src/Writer/PngWriter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/src/Writer/SvgWriter.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/endroid/qr-code/src/Writer/SvgWriter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/src/WriterRegistry.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/endroid/qr-code/src/WriterRegistry.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/src/WriterRegistryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/endroid/qr-code/src/WriterRegistryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/endroid/qr-code/tests/QrCodeTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/endroid/qr-code/tests/QrCodeTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/myclabs/php-enum/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/myclabs/php-enum/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/myclabs/php-enum/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/myclabs/php-enum/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/myclabs/php-enum/src/Enum.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/myclabs/php-enum/src/Enum.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/inflector/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/inflector/Inflector.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/inflector/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/inflector/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/inflector/composer.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/options-resolver/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/options-resolver/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/options-resolver/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/options-resolver/Debug/OptionsResolverIntrospector.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/options-resolver/Debug/OptionsResolverIntrospector.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/options-resolver/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/options-resolver/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/options-resolver/OptionsResolver.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/options-resolver/OptionsResolver.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/options-resolver/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/options-resolver/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/polyfill-ctype/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-ctype/bootstrap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/polyfill-ctype/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-ctype/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/property-access/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/property-access/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/property-access/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/property-access/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/property-access/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/property-access/PropertyAccessor.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/property-access/PropertyAccessor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/property-access/PropertyAccessorBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/property-access/PropertyAccessorBuilder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/property-access/PropertyPath.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/property-access/PropertyPath.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/property-access/PropertyPathBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/property-access/PropertyPathBuilder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/property-access/PropertyPathInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/property-access/PropertyPathInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/property-access/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/property-access/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/property-access/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/property-access/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/topthink/think-installer/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/topthink/think-installer/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/topthink/think-installer/src/Plugin.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/topthink/think-installer/src/Plugin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/gateway-worker/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/gateway-worker/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/gateway-worker/src/BusinessWorker.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/gateway-worker/src/BusinessWorker.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/gateway-worker/src/Gateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/gateway-worker/src/Gateway.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/gateway-worker/src/Lib/Gateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/gateway-worker/src/Lib/Gateway.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Autoloader.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Autoloader.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Connection/AsyncTcpConnection.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Connection/AsyncTcpConnection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Connection/AsyncUdpConnection.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Connection/AsyncUdpConnection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Connection/ConnectionInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Connection/ConnectionInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Connection/TcpConnection.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Connection/TcpConnection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Connection/UdpConnection.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Connection/UdpConnection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Events/Ev.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Events/Ev.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Events/Libevent.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Events/Libevent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Events/React/Base.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Events/React/Base.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Events/Select.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Events/Select.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Events/Swoole.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Events/Swoole.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Lib/Constants.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Lib/Constants.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Lib/Timer.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Lib/Timer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Protocols/Http.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Protocols/Http.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Protocols/Http/mime.types" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Protocols/Http/mime.types" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Protocols/ProtocolInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Protocols/ProtocolInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Protocols/Text.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Protocols/Text.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Protocols/Websocket.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Protocols/Websocket.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Protocols/Ws.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Protocols/Ws.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/WebServer.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/workerman/workerman/Worker.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/workerman/workerman/Worker.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -266,7 +140,11 @@
       <workItem from="1609267388336" duration="48000" />
       <workItem from="1609300824490" duration="2817000" />
       <workItem from="1609313627785" duration="281000" />
-      <workItem from="1609319755020" duration="1061000" />
+      <workItem from="1609319755020" duration="2555000" />
+      <workItem from="1609322542897" duration="264000" />
+      <workItem from="1609385339926" duration="1354000" />
+      <workItem from="1609399149519" duration="2426000" />
+      <workItem from="1609408605223" duration="627000" />
     </task>
     <servers />
   </component>
