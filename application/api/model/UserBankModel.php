@@ -22,7 +22,7 @@ class UserBankModel extends Model{
 		$bank_id			= input('post.bank_id/s');	// 银行名称
 	//	$bank_branch_name	= input('post.bank_branch_name/s');	// 支行名称
 		$remark				= input('post.remark/s');			// 备注
-		
+		$bank_code = isset($post['bank_code']) ? input('post.bank_code/s') : '';
 		/* 数据验证 */
 		if(empty($name))
 		if($lang=='cn'){
@@ -86,7 +86,26 @@ class UserBankModel extends Model{
 					}elseif($lang=='th'){
 						return ['code' => 2, 'code_dec' => 'ชื่อธนาคารว่างเปล่า'];
 					}
-		
+        if(empty($bank_code))
+            if($lang=='cn'){
+                return ['code' => 2, 'code_dec'	=> 'bank code为空'];
+            }elseif($lang=='en'){
+                return ['code' => 2, 'code_dec' => 'bank code is empty'];
+            }elseif($lang=='id'){
+                return ['code' => 2, 'code_dec' => 'bank code kosong'];
+            }elseif($lang=='ft'){
+                return ['code' => 2, 'code_dec' => 'bank code為空'];
+            }elseif($lang=='yd'){
+                return ['code' => 2, 'code_dec' => 'बैंक नाम खाली है'];
+            }elseif($lang=='vi'){
+                return ['code' => 2, 'code_dec' => 'Tên ngân hàng rỗng'];
+            }elseif($lang=='es'){
+                return ['code' => 2, 'code_dec' => 'Nombre del Banco'];
+            }elseif($lang=='ja'){
+                return ['code' => 2, 'code_dec' => 'bank code前は空です'];
+            }elseif($lang=='th'){
+                return ['code' => 2, 'code_dec' => 'ชื่อธนาคารว่างเปล่า'];
+            }
 	//	if(empty($bank_branch_name))	return ['code' => 2, 'code_dec'	=> '支行名称为空'];
 		if(empty($remark))	$remark	= '';
 		
@@ -186,6 +205,7 @@ class UserBankModel extends Model{
 		//	'bank_branch_name'	=> $bank_branch_name,	// 支行名称
 			'remark'			=> $remark,	// 备注
 			'add_time'			=> time(),
+			'bank_code'			=> $bank_code,
 		);
 		$insert_ok = $this->insert($bankCard_arr);
 		if(!$insert_ok)

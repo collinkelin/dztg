@@ -13,8 +13,10 @@ class UserWithdrawalsModel extends model
         $pay_config = config('pay.');
         $this->user_seller  = $pay_config['user_seller'];
         $this->url   = $pay_config['url'];
-        $this->private_key     = Env::get('app_path').'api/config/private.key';
-        $this->pub_key     = Env::get('app_path').'api/config/public.key';
+//        $this->private_key     = Env::get('app_path').'api/config/private.key';
+//        $this->pub_key     = Env::get('app_path').'api/config/public.key';
+        $this->private_key     = file_get_contents(Env::get('app_path').'api/config/private.key');
+        $this->pub_key     = file_get_contents(Env::get('app_path').'api/config/public.key');
         $this->partner = $pay_config['parter'];
         return $this;
     }
@@ -23,8 +25,8 @@ class UserWithdrawalsModel extends model
         $this->url = $this->config()->url;
         $url = $this->url .'/api/cash';
         $parameter = array(
-            'parter' => $this->partner,                    //商户PID
-            'user_seller' => $this->user_seller,                //商户号
+            'parter' => $this->config()->partner,                    //商户PID
+            'user_seller' => $this->config()->user_seller,                //商户号
             'order_no' => $order_data['order_no'],                   //网站订单号
             'money' => $order_data['money'],
             'name' => $order_data['account'],
@@ -34,6 +36,7 @@ class UserWithdrawalsModel extends model
             'api_version' => '1.1',
         );
         $parameter['sign'] = $this->sign_cash($parameter);
+//        var_dump($parameter);
         $result = $this->post_cash($url, $parameter); //这里返回的json格式数据
         return json_decode($result,true);
     }
